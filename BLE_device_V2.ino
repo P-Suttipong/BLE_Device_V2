@@ -259,7 +259,11 @@ void getData() {
     for (int c = 0; c < len; c++) {
       String eeprom = doc["beacon"][c]["eeprom"];
       String mac = doc["beacon"][c]["mac"];
-      returnMsg = returnMsg + String(",") + String(mac);
+      if (mac.length() < 5) {
+        returnMsg = returnMsg + String(",") + String(eeprom);
+      } else {
+        returnMsg = returnMsg + String(",") + String(mac);
+      }
       saveMACtoEEPROM(mac, eeprom);
     }
     returnMsg = returnMsg + "\"}";
